@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { ServiceEmail } from 'src/app/services/service.email';
 
 @Component({
   selector: 'app-contactar-admin',
@@ -7,10 +8,28 @@ import { Router } from '@angular/router';
   styleUrls: ['./contactar-admin.component.css'],
 })
 export class ContactarAdminComponent {
-  constructor(private _router: Router) {}
+  @ViewChild('controlasunto') controlAsunto!: ElementRef;
+  @ViewChild('controlcomentarios') controlComentarios!: ElementRef;
+  public mensaje:any;
+  constructor(private _router: Router,
+    private _serviceEmail: ServiceEmail,) {
+    /*this.mensaje={
+      Asunto:"",
+      Cuerpo:""
+    }*/
+  }
 
   enviarSolicitud(): void {
-    // COSA DEL BACK
+    let asunto = this.controlAsunto.nativeElement.value;
+    let cuerpo = this.controlComentarios.nativeElement.value;
+
+    //Implementar el Service en API
+    this._serviceEmail
+      .sendEmail(asunto, cuerpo)
+      .subscribe((response) => {
+        console.log(response);
+      });
+
     this._router.navigate(['/usuario/perfil']);
   }
 }
