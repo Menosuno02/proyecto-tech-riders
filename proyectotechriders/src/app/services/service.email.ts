@@ -10,8 +10,11 @@ export class ServiceEmail {
   sendEmail(asunto: string, cuerpo: string): Observable<any> {
     let url = environment.urlApi;
     let request = 'api/SendMail';
-    let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
-    return this._http.post(url + request, {
+    let header = { 
+      'Content-Type': 'application/json',
+      Authorization: 'bearer ' + localStorage.getItem('token') 
+    };
+    return this._http.post(url + request,null, {
       headers: header,
       params: {
         asunto: asunto,

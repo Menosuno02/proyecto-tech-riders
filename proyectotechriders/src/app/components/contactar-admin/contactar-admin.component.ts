@@ -10,14 +10,8 @@ import { ServiceEmail } from 'src/app/services/service.email';
 export class ContactarAdminComponent {
   @ViewChild('controlasunto') controlAsunto!: ElementRef;
   @ViewChild('controlcomentarios') controlComentarios!: ElementRef;
-  public mensaje:any;
   constructor(private _router: Router,
-    private _serviceEmail: ServiceEmail,) {
-    /*this.mensaje={
-      Asunto:"",
-      Cuerpo:""
-    }*/
-  }
+    private _serviceEmail: ServiceEmail) { }
 
   enviarSolicitud(): void {
     let asunto = this.controlAsunto.nativeElement.value;
