@@ -70,6 +70,7 @@ import { ServiceTecnologiasTechRiders } from './services/service.tecnologiastech
 import { ServiceTipoTecnologias } from './services/service.tipotecnologias';
 import { ServiceUsuarios } from './services/service.usuarios';
 import { ServiceValoracionesCharlas } from './services/service.valoracionescharlas';
+import { ServiceEmail } from './services/service.email';
 
 @NgModule({
   declarations: [
@@ -145,6 +146,7 @@ import { ServiceValoracionesCharlas } from './services/service.valoracionescharl
     ServiceTipoTecnologias,
     ServiceUsuarios,
     ServiceValoracionesCharlas,
+    ServiceEmail,
     appRoutingProvider,
     { provide: LOCALE_ID, useValue: 'es' },
   ],
