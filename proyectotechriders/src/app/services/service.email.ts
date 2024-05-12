@@ -14,12 +14,11 @@ export class ServiceEmail {
       'Content-Type': 'application/json',
       Authorization: 'bearer ' + localStorage.getItem('token') 
     };
-    return this._http.post(url + request,null, {
-      headers: header,
-      params: {
-        asunto: asunto,
-        cuerpo: cuerpo,
-      },
+    const body = JSON.stringify({
+      'asunto': asunto,
+      'cuerpo': cuerpo
     });
+
+    return this._http.post(url + request, body, {headers: header});
   }
 }
