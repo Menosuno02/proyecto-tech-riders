@@ -10,6 +10,7 @@
         class="form-control"
         name="controlasunto"
         #controlasunto
+        required
       />
     </div>
 
@@ -21,7 +22,10 @@
         #controlcomentarios
         rows="3"
         style="resize: none"
+        required
+        minlength="20"
       ></textarea>
+      <a class="text-danger text-decoration-none">{{mensaje}}</a>
     </div>
 
     <div class="col-12">

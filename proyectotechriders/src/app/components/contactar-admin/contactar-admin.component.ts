@@ -10,6 +10,7 @@ import { ServiceEmail } from 'src/app/services/service.email';
 export class ContactarAdminComponent {
   @ViewChild('controlasunto') controlAsunto!: ElementRef;
   @ViewChild('controlcomentarios') controlComentarios!: ElementRef;
+  public mensaje!: string;
   constructor(private _router: Router,
     private _serviceEmail: ServiceEmail) { }
 
@@ -17,13 +18,16 @@ export class ContactarAdminComponent {
     let asunto = this.controlAsunto.nativeElement.value;
     let cuerpo = this.controlComentarios.nativeElement.value;
 
-    //Implementar el Service en API
-    this._serviceEmail
-      .sendEmail(asunto, cuerpo)
-      .subscribe((response) => {
-        console.log(response);
-      });
+    if (cuerpo.length < 20) {
+      this.mensaje = 'El comentario debe tener al menos 20 caracteres.';
+    } else {
+      this._serviceEmail
+        .sendEmail(asunto, cuerpo)
+        .subscribe((response) => {
+          console.log(response);
+        });
 
-    this._router.navigate(['/usuario/perfil']);
+      this._router.navigate(['/usuario/perfil']);
+    }
   }
 }
