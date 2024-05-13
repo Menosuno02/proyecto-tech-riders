@@ -42,7 +42,6 @@ export class ContactarAdminComponent {
               timer: 1500
             });
           });
-  
         this._router.navigate(['/usuario/perfil']);
       });
     }
