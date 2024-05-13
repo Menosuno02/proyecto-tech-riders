@@ -10,6 +10,7 @@ import { ServiceUsuarios } from 'src/app/services/service.usuarios';
   styleUrls: ['./contactar-admin.component.css'],
 })
 export class ContactarAdminComponent {
+  //Modificaciones 13/05 GRUPO 8
   @ViewChild('controlasunto') controlAsunto!: ElementRef;
   @ViewChild('controlcomentarios') controlComentarios!: ElementRef;
   public mensaje!: string;
