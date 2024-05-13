@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Usuario } from 'src/app/models/Usuario';
 import { ServiceEmail } from 'src/app/services/service.email';
 import { ServiceUsuarios } from 'src/app/services/service.usuarios';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-contactar-admin',
@@ -29,12 +30,17 @@ export class ContactarAdminComponent {
     } else {
       this._serviceUsuarios.getPerfilUsuario().subscribe((response) => {
         this.usuario = response;
-        //console.log(this.usuario.email);
         cuerpo+="<br/><br/><strong>Interesado: " +this.usuario.email + "</strong>";
         this._serviceEmail
           .sendEmail(asunto, cuerpo)
           .subscribe((response) => {
-            console.log("Respuesta: " +response);
+            Swal.fire({
+              color: '#333333',
+              icon: 'success',
+              title: 'Se ha envido correctamente',
+              showConfirmButton: false,
+              timer: 1500
+            });
           });
   
         this._router.navigate(['/usuario/perfil']);
