@@ -39,6 +39,7 @@ export class PerfilusuarioComponent implements OnInit {
     else {
       this._serviceUsuarios.getPerfilUsuario().subscribe((response) => {
         this.usuario = response;
+        console.log(this.usuario);
         this._serviceProvincias
           .findProvincia(this.usuario.idProvincia)
           .subscribe((response) => {
