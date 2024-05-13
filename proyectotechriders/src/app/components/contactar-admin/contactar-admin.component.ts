@@ -20,7 +20,6 @@ export class ContactarAdminComponent {
   constructor(private _router: Router,
     private _serviceEmail: ServiceEmail,
     private _serviceUsuarios: ServiceUsuarios) { }
-
   enviarSolicitud(): void {
     let asunto = this.controlAsunto.nativeElement.value;
     let cuerpo = this.controlComentarios.nativeElement.value;
