@@ -1,9 +1,13 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { Charla } from 'src/app/models/Charla';
 import { EstadoCharla } from 'src/app/models/EstadoCharla';
+import { Usuario } from 'src/app/models/Usuario';
 import { ServiceCharlas } from 'src/app/services/service.charlas';
+import { ServiceEmail } from 'src/app/services/service.email';
 import { ServiceEstadosCharlas } from 'src/app/services/service.estadoscharlas';
 import { ServiceQueryTools } from 'src/app/services/service.querytools';
+import { ServiceUsuarios } from 'src/app/services/service.usuarios';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -25,6 +29,8 @@ export class CharlasprofesorComponent implements OnInit {
     private _serviceQueryTools: ServiceQueryTools,
     private _serviceEstadosCharlas: ServiceEstadosCharlas,
     private _serviceCharlas: ServiceCharlas,
+    private _serviceEmail: ServiceEmail,
+    private _serviceUsuarios: ServiceUsuarios,
     private _router: Router
   ) {}
 
@@ -98,7 +104,47 @@ export class CharlasprofesorComponent implements OnInit {
               timerProgressBar: true,
               title: 'Charla cancelada',
             });
-            this.recargarCharlas();
+            this._serviceCharlas.findCharla(idCharla).subscribe((response) => {
+              let charla: Charla = response;
+              this._serviceQueryTools
+                .getCursosProfesorAll()
+                .subscribe((response) => {
+                  let cursosProfesores: any[] = response;
+                  let correos: string[] = [];
+                  cursosProfesores.forEach((element) => {
+                    if (element.idCurso == charla.idCurso)
+                      correos.push(element.emailProfesor);
+                  });
+                  if (charla.idTechRider != 0 || charla.idTechRider != null) {
+                    this._serviceUsuarios
+                      .findUsuario(charla.idTechRider || 0)
+                      .subscribe((response) => {
+                        let usuario: Usuario = response;
+                        correos.push(usuario.email);
+                        this._serviceUsuarios
+                          .getUsuarios()
+                          .subscribe((response) => {
+                            let usuarios: Usuario[] = response;
+                            usuarios = usuarios.filter(
+                              (usu) =>
+                                usu.idEmpresaCentro ==
+                                  usuario.idEmpresaCentro && usu.idRole == 4
+                            );
+                            usuarios.forEach((usu) => {
+                              correos.push(usu.email);
+                            });
+                            let asunto: string = 'INFO CHARLA TECH RIDERS';
+                            let mensaje: string = 'Charla cancelada';
+                            this._serviceEmail
+                              .enviarMail(correos, asunto, mensaje)
+                              .subscribe(() => {
+                                this.recargarCharlas();
+                              });
+                          });
+                      });
+                  }
+                });
+            });
           });
       }
     });
