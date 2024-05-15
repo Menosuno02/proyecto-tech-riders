@@ -70,6 +70,7 @@ import { ServiceTecnologiasTechRiders } from './services/service.tecnologiastech
 import { ServiceTipoTecnologias } from './services/service.tipotecnologias';
 import { ServiceUsuarios } from './services/service.usuarios';
 import { ServiceValoracionesCharlas } from './services/service.valoracionescharlas';
+import { ServiceEmail } from './services/service.email';
 
 @NgModule({
   declarations: [
@@ -130,6 +131,7 @@ import { ServiceValoracionesCharlas } from './services/service.valoracionescharl
     ServiceCharlas,
     ServiceCursos,
     ServiceCursosProfesores,
+    ServiceEmail,
     ServiceEmpresasCentros,
     ServiceEstadosCharlas,
     ServicePeticionesAltaUsers,

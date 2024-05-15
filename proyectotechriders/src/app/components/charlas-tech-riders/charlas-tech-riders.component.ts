@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { ServiceQueryTools } from 'src/app/services/service.querytools';
 import { ServiceCharlas } from 'src/app/services/service.charlas';
+import { ServiceEmail } from 'src/app/services/service.email';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-charlas-tech-riders',
@@ -18,6 +20,7 @@ export class CharlasTechRidersComponent implements OnInit {
   constructor(
     private _serviceQueryTools: ServiceQueryTools,
     private _serviceCharlas: ServiceCharlas,
+    private _serviceEmail: ServiceEmail,
     private _router: Router
   ) {}
 
@@ -56,7 +59,29 @@ export class CharlasTechRidersComponent implements OnInit {
                 .updateEstadoCharla(idcharla, 3)
                 .subscribe(() => {
                   this._serviceQueryTools.actualizacionCharlas();
-                  this._router.navigate(['/mischarlastech']);
+                  this._serviceCharlas
+                    .findCharla(idcharla)
+                    .subscribe((response) => {
+                      let idcurso: number = response.idCurso;
+                      this._serviceQueryTools
+                        .getCursosProfesorAll()
+                        .subscribe((response) => {
+                          let cursosProfesores: any[] = response;
+                          let correos: string[] = [];
+                          cursosProfesores.forEach((element) => {
+                            if (element.idCurso == idcurso)
+                              correos.push(element.emailProfesor);
+                          });
+                          correos.push(environment.emailAdmin);
+                          let asunto: string = 'INFO CHARLA TECH RIDERS';
+                          let mensaje: string = 'Asociar charla';
+                          this._serviceEmail
+                            .enviarMail(correos, asunto, mensaje)
+                            .subscribe(() => {
+                              this._router.navigate(['/mischarlastech']);
+                            });
+                        });
+                    });
                 });
             });
         }

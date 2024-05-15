@@ -125,4 +125,13 @@ export class ServiceQueryTools {
       params: { idtechrider: idTechRider },
     });
   }
+
+  getCursosProfesorAll(): Observable<any> {
+    let url = environment.urlApi;
+    let request = 'api/QueryTools/CursosProfesorAll';
+    let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
+    return this._http.get(url + request, {
+      headers: header,
+    });
+  }
 }
