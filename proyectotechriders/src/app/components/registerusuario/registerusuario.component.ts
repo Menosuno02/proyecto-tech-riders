@@ -26,6 +26,7 @@ export class RegisterusuarioComponent implements OnInit {
   @ViewChild('selectrole') selectRole!: ElementRef;
   @ViewChild('selectprovincia') selectProvincia!: ElementRef;
   @ViewChild('selectempresacentro') selectEmpresaCentro!: ElementRef;
+  @ViewChild('controlimagen') controlImagen!: ElementRef;
 
   public roles!: Role[];
   public provincias!: Provincia[];
@@ -78,21 +79,35 @@ export class RegisterusuarioComponent implements OnInit {
     let idEmpresaCentro =
       this.selectEmpresaCentro.nativeElement.selectedOptions[0].value;
     if (idEmpresaCentro == 0) idEmpresaCentro = null;
-    let usuario: Usuario = {
-      idUsuario: 0,
-      nombre: this.controlNombre.nativeElement.value,
-      apellidos: this.controlApellidos.nativeElement.value,
-      email: this.controlEmail.nativeElement.value,
-      telefono: this.controlTlf.nativeElement.value,
-      linkedIn: this.controlLinkedin.nativeElement.value,
-      password: this.controlPassword.nativeElement.value,
-      idRole: this.selectRole.nativeElement.selectedOptions[0].value,
-      idProvincia: this.selectProvincia.nativeElement.selectedOptions[0].value,
-      idEmpresaCentro: idEmpresaCentro,
-      estado: 2,
-      linkedInVisible: this.publico ? 1 : 0,
-    };
-    this._serviceUsuarios.createUsuario(usuario).subscribe((response) => {
+    // let usuario: Usuario = {
+    //   idUsuario: 0,
+    //   nombre: this.controlNombre.nativeElement.value,
+    //   apellidos: this.controlApellidos.nativeElement.value,
+    //   email: this.controlEmail.nativeElement.value,
+    //   telefono: this.controlTlf.nativeElement.value,
+    //   linkedIn: this.controlLinkedin.nativeElement.value,
+    //   password: this.controlPassword.nativeElement.value,
+    //   idRole: this.selectRole.nativeElement.selectedOptions[0].value,
+    //   idProvincia: this.selectProvincia.nativeElement.selectedOptions[0].value,
+    //   idEmpresaCentro: idEmpresaCentro,
+    //   estado: 2,
+    //   linkedInVisible: this.publico ? 1 : 0,
+    // };
+    let formUsuario :FormData = new FormData();
+    formUsuario.append('Usuario.IdUsuario', '0');
+    formUsuario.append('Usuario.Nombre', this.controlNombre.nativeElement.value);
+    formUsuario.append('Usuario.Apellidos', this.controlApellidos.nativeElement.value);
+    formUsuario.append('Usuario.Email', this.controlEmail.nativeElement.value);
+    formUsuario.append('Usuario.Telefono', this.controlTlf.nativeElement.value);
+    formUsuario.append('Usuario.LinkedIn', this.controlLinkedin.nativeElement.value);
+    formUsuario.append('Usuario.Password', this.controlPassword.nativeElement.value);
+    formUsuario.append('Usuario.IdRole', this.selectRole.nativeElement.selectedOptions[0].value);
+    formUsuario.append('Usuario.IdProvincia', this.selectProvincia.nativeElement.selectedOptions[0].value);
+    formUsuario.append('Usuario.IdEmpresaCentro', idEmpresaCentro.toString());
+    formUsuario.append('Usuario.Estado', '2');
+    formUsuario.append('Usuario.LinkedInVisible', this.publico ? '1' : '0');
+    formUsuario.append('Imagen', this.controlImagen.nativeElement.files[0]);
+    this._serviceUsuarios.createUsuario(formUsuario).subscribe((response) => {
       let idUsuario = response.idUsuario;
       this._servicePeticionesAltaUsers
         .createPeticionAltaUser(idUsuario)

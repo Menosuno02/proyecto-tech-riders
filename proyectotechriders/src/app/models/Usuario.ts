@@ -11,6 +11,7 @@ export class Usuario {
     public idProvincia: number,
     public idEmpresaCentro: number,
     public estado: number,
-    public linkedInVisible: number
+    public linkedInVisible: number,
+    public imagen: string
   ) {}
 }

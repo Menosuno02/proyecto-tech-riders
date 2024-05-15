@@ -28,6 +28,7 @@ export class EditarusuarioComponent implements OnInit {
   @ViewChild('controltelefono') controlTelefono!: ElementRef;
   @ViewChild('controllinkedin') controlLinkedin!: ElementRef;
   @ViewChild('selectprovincia') selectProvincia!: ElementRef;
+  @ViewChild('controlimagen') controlImagen!: ElementRef;
 
   // Empresa
   @ViewChild('controlnombreempresa') controlnombreempresa!: ElementRef;
@@ -67,22 +68,43 @@ export class EditarusuarioComponent implements OnInit {
   }
 
   editarPerfil(): void {
-    let usuario: Usuario = {
-      idUsuario: this.usuario.idUsuario,
-      nombre: this.controlNombre.nativeElement.value,
-      apellidos: this.controlApellidos.nativeElement.value,
-      email: this.controlEmail.nativeElement.value,
-      telefono: this.controlTelefono.nativeElement.value,
-      linkedIn: this.controlLinkedin.nativeElement.value,
-      password: this.usuario.password,
-      idRole: this.usuario.idRole,
-      idProvincia: this.selectProvincia.nativeElement.selectedOptions[0].value,
-      idEmpresaCentro: this.usuario.idEmpresaCentro,
-      estado: this.usuario.estado,
-      linkedInVisible: this.publico ? 1 : 0,
-    };
+    // let usuario: Usuario = {
+    //   idUsuario: this.usuario.idUsuario,
+    //   nombre: this.controlNombre.nativeElement.value,
+    //   apellidos: this.controlApellidos.nativeElement.value,
+    //   email: this.controlEmail.nativeElement.value,
+    //   telefono: this.controlTelefono.nativeElement.value,
+    //   linkedIn: this.controlLinkedin.nativeElement.value,
+    //   password: this.usuario.password,
+    //   idRole: this.usuario.idRole,
+    //   idProvincia: this.selectProvincia.nativeElement.selectedOptions[0].value,
+    //   idEmpresaCentro: this.usuario.idEmpresaCentro,
+    //   estado: this.usuario.estado,
+    //   linkedInVisible: this.publico ? 1 : 0,
+    //   imagen: this.controlImagen.nativeElement.files[0].name
+    // };
 
-    this._serviceUsuarios.editUsuario(usuario).subscribe((response) => {
+    let formUsuario = new FormData();
+
+    formUsuario.append('Usuario.IdUsuario', this.usuario.idUsuario.toString());
+    formUsuario.append('Usuario.Nombre', this.controlNombre.nativeElement.value);
+    formUsuario.append('Usuario.Apellidos', this.controlApellidos.nativeElement.value);
+    formUsuario.append('Usuario.Email', this.controlEmail.nativeElement.value);
+    formUsuario.append('Usuario.Telefono', this.controlTelefono.nativeElement.value);
+    formUsuario.append('Usuario.LinkedIn', this.controlLinkedin.nativeElement.value);
+    formUsuario.append('Usuario.Password', this.usuario.password);
+    formUsuario.append('Usuario.IdRole', this.usuario.idRole.toString());
+    formUsuario.append('Usuario.IdProvincia', this.selectProvincia.nativeElement.selectedOptions[0].value);
+    formUsuario.append('Usuario.IdEmpresaCentro', this.usuario.idEmpresaCentro ? this.usuario.idEmpresaCentro.toString() : "");
+    formUsuario.append('Usuario.Estado', this.usuario.estado.toString());
+    formUsuario.append('Usuario.LinkedInVisible', this.publico ? '1' : '0');
+
+    const imageFile = this.controlImagen.nativeElement.files[0];
+    if (imageFile) {
+      formUsuario.append('Imagen', imageFile, imageFile.name);
+    }
+
+    this._serviceUsuarios.editUsuarioForm(formUsuario).subscribe((response) => {
       if (this.role == 4) {
         let empresa: EmpresaCentro = {
           idEmpresaCentro: this.empresaCentro.idEmpresaCentro,
