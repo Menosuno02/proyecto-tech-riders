@@ -147,6 +147,7 @@ import { ServiceEmail } from './services/service.email';
     ServiceTipoTecnologias,
     ServiceUsuarios,
     ServiceValoracionesCharlas,
+    ServiceEmail,
     appRoutingProvider,
     { provide: LOCALE_ID, useValue: 'es' },
   ],
