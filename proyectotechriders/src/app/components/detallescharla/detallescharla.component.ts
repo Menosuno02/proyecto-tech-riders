@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Charla } from 'src/app/models/Charla';
-import { DetallesCharlas } from 'src/app/models/DetallesCharlas';
 import { DetallesEstadoCharlaTech } from 'src/app/models/DetallesEstadoCharlaTechRiders';
 import { MailModel } from 'src/app/models/MailModel';
 import { TecnologiaCharla } from 'src/app/models/TecnologiaCharla';
-import { TechRider } from 'src/app/models/techRider';
 import { ServiceCharlas } from 'src/app/services/service.charlas';
 import { ServiceLogicapps } from 'src/app/services/service.logicapps';
 import { ServiceQueryTools } from 'src/app/services/service.querytools';
 import { ServiceSolicitudAcreditacionesCharlas } from 'src/app/services/service.solicitudacreditacionescharlas';
 import { ServiceTecnologias } from 'src/app/services/service.tecnologias';
 import { ServiceTecnologiasCharlas } from 'src/app/services/service.tecnologiascharlas';
+import { environment } from 'src/environments/environment.development';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -36,12 +35,9 @@ export class DetallescharlaComponent implements OnInit {
     private _serviceMail: ServiceLogicapps,
     private _serviceSolicitudAcred: ServiceSolicitudAcreditacionesCharlas,
     private _serviceCharlas: ServiceCharlas
-
   ) {
-
     this.idUsuario = parseInt(localStorage.getItem('idUsuario')!);
     this.idEstadoCharlaCompl = 5;
-
   }
 
   ngOnInit(): void {
@@ -73,43 +69,59 @@ export class DetallescharlaComponent implements OnInit {
 
   //Modificion Mauricio
   enviarSolicitudAcreditacion(): void {
-    var charlaDetalles: DetallesEstadoCharlaTech = this.charla as DetallesEstadoCharlaTech;
+    var charlaDetalles: DetallesEstadoCharlaTech = this
+      .charla as DetallesEstadoCharlaTech;
     console.log(charlaDetalles);
 
     this._serviceCharlas.findCharla(charlaDetalles.idCharla).subscribe({
       next: (data: Charla) => {
-        var linkpost = "<a href=" + data.acreditacionLinkedIn + ">" + data.acreditacionLinkedIn + "</a>";
+        var linkpost =
+          '<a href=' +
+          data.acreditacionLinkedIn +
+          '>' +
+          data.acreditacionLinkedIn +
+          '</a>';
         if (data.acreditacionLinkedIn == null) {
-          linkpost = "<p>No se ha asignado el link a la acreditación en LinkedIn para esta charla.</p>";
+          linkpost =
+            '<p>No se ha asignado el link a la acreditación en LinkedIn para esta charla.</p>';
         }
+        let email: string = environment.emailAdmin;
         var correo: MailModel = {
-          email: "hectormauricio.almaraz@tajamar365.com",
-          asunto: "Solicitud de acreditación charla",
-          mensaje: `
+          email: email,
+          asunto: 'Solicitud de acreditación charla',
+          mensaje:
+            `
           <h4>Solicitud acreditación</h4>
           <p>
-            El TechRider `+ charlaDetalles.email + ` ha solicitado la acreditación para la charla ` + charlaDetalles.descripcionCharla + ` que tuvo lugar el ` + charlaDetalles.fechaCharla + `.
+            El TechRider ` +
+            charlaDetalles.email +
+            ` ha solicitado la acreditación para la charla ` +
+            charlaDetalles.descripcionCharla +
+            ` que tuvo lugar el ` +
+            charlaDetalles.fechaCharla +
+            `.
           </p>
-          `+ linkpost
+          ` +
+            linkpost,
         };
         this._serviceMail.sendMail(correo).subscribe({
           complete: () => {
-            this._serviceSolicitudAcred.createSolicitudAcreditacionCharla(charlaDetalles.idCharla).subscribe({
-              complete: () => {
-                Swal.fire({
-                  color: '#333333',
-                  icon: 'success',
-                  text: 'El proceso ha sido exitoso',
-                  title: 'Operación completada',
-                  timer: 1500
-                });
-              },
-            });
+            this._serviceSolicitudAcred
+              .createSolicitudAcreditacionCharla(charlaDetalles.idCharla)
+              .subscribe({
+                complete: () => {
+                  Swal.fire({
+                    color: '#333333',
+                    icon: 'success',
+                    text: 'El proceso ha sido exitoso',
+                    title: 'Operación completada',
+                    timer: 1500,
+                  });
+                },
+              });
           },
         });
       },
     });
-
-
   }
 }
