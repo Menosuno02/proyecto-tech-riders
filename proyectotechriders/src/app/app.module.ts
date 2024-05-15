@@ -51,6 +51,7 @@ import { RegisterusuarioComponent } from './components/registerusuario/registeru
 import { SolicitarcharlaComponent } from './components/solicitarcharla/solicitarcharla.component';
 import { ValoracioncharlaComponent } from './components/valoracioncharla/valoracioncharla.component';
 
+
 import { ServiceAuth } from './services/service.auth';
 import { ServiceCharlas } from './services/service.charlas';
 import { ServiceCursos } from './services/service.cursos';
@@ -70,6 +71,9 @@ import { ServiceTecnologiasTechRiders } from './services/service.tecnologiastech
 import { ServiceTipoTecnologias } from './services/service.tipotecnologias';
 import { ServiceUsuarios } from './services/service.usuarios';
 import { ServiceValoracionesCharlas } from './services/service.valoracionescharlas';
+import { RecuperarContrasenaComponent } from './components/recuperar-contrasena/recuperar-contrasena.component';
+import { Serviceenviarcorreo } from './services/service.enviarcorreo';
+import { ModificarContrasenyaTokenComponent } from './components/modificar-contrasenya-token/modificar-contrasenya-token.component';
 import { ServiceEmail } from './services/service.email';
 
 @NgModule({
@@ -111,6 +115,9 @@ import { ServiceEmail } from './services/service.email';
     RegisterusuarioComponent,
     SolicitarcharlaComponent,
     ValoracioncharlaComponent,
+    RecuperarContrasenaComponent,
+    ModificarContrasenyaTokenComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -131,7 +138,6 @@ import { ServiceEmail } from './services/service.email';
     ServiceCharlas,
     ServiceCursos,
     ServiceCursosProfesores,
-    ServiceEmail,
     ServiceEmpresasCentros,
     ServiceEstadosCharlas,
     ServicePeticionesAltaUsers,
@@ -147,6 +153,7 @@ import { ServiceEmail } from './services/service.email';
     ServiceTipoTecnologias,
     ServiceUsuarios,
     ServiceValoracionesCharlas,
+    Serviceenviarcorreo,
     ServiceEmail,
     appRoutingProvider,
     { provide: LOCALE_ID, useValue: 'es' },

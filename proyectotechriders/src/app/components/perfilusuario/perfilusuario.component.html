@@ -25,15 +25,8 @@
     <div class="mt-3">
       <div class="row">
         <div class="col-md-8 mb-2">
-          <h4 class="fw-bolder mb-3">
-            {{ usuario.nombre }} {{ usuario.apellidos }}
-          </h4>
-          <div>
-            <h5>
-              <span>{{ role.tipoRole }}</span>
-              <span *ngIf="empresaCentro"> en {{ empresaCentro.nombre }}</span>
-            </h5>
-          </div>
+          <img class="img-fluid w-100 rounded mb-4" id="usuarioimagen" style="max-width: 425px; max-height: 425px;" 
+          [src]="usuario.imagen ?  urlApiImg + usuario.imagen : '../../../assets/images/img-default-user.png' " />          
         </div>
         <div class="col-md-4 d-flex">
           <div class="dropdown-center ms-auto w-100">
@@ -100,6 +93,17 @@
       </div>
 
       <div class="row">
+        <div class="col-md-8 mb-2">
+          <h4 class="fw-bolder mb-3">
+            {{ usuario.nombre }} {{ usuario.apellidos }}
+          </h4>
+          <div>
+            <h5>
+              <span>{{ role.tipoRole }}</span>
+              <span *ngIf="empresaCentro"> en {{ empresaCentro.nombre }}</span>
+            </h5>
+          </div>
+        </div>
         <div class="col-md-6 mt-3">
           <label class="form-label fw-bold">
             <svg

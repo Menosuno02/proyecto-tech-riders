@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ServiceQueryTools } from 'src/app/services/service.querytools';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-listadotr',
@@ -18,6 +19,7 @@ export class ListadotrComponent implements OnInit {
   public filter_array!: any;
   public role!: number | null;
   public techRidersCargados: boolean = false;
+  public urlApiImg: string = environment.urlApiImgs;
 
   constructor(private _serviceQueryTools: ServiceQueryTools) {}
 

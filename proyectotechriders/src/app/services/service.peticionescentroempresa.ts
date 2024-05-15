@@ -19,7 +19,7 @@ export class ServicePeticionesCentroEmpresa {
 
   getPeticionesCentroEmpresa(): Observable<any> {
     let url = environment.urlApi;
-    let request = '/api/PeticionesCentroEmpresa';
+    let request = 'api/PeticionesCentroEmpresa';
     let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
     return this._http.get(url + request, { headers: header });
   }

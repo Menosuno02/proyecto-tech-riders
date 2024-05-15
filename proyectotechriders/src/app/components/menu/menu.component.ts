@@ -29,7 +29,6 @@ export class MenuComponent implements DoCheck {
           this.token != localStorage.getItem('token'))) ||
       (this.role != 0 && parseInt(localStorage.getItem('role') ?? '0') == 0)
     ) {
-      console.log('CUIDAO');
       this.role = parseInt(localStorage.getItem('role') ?? '0');
       this.token = localStorage.getItem('token');
       if (this.role == 3 || this.role == 4) {
