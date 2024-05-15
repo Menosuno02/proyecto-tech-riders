@@ -7,6 +7,9 @@ import { ServiceQueryTools } from 'src/app/services/service.querytools';
 import { ServiceCharlas } from 'src/app/services/service.charlas';
 import { ServiceUsuarios } from 'src/app/services/service.usuarios';
 import { ServiceSolicitudAcreditacionesCharlas } from 'src/app/services/service.solicitudacreditacionescharlas';
+import { ServiceEmail } from 'src/app/services/service.email';
+import { environment } from 'src/environments/environment.development';
+import { Charla } from 'src/app/models/Charla';
 
 @Component({
   selector: 'app-mischarrlas-techriders',
@@ -23,6 +26,7 @@ export class MischarrlasTechridersComponent implements OnInit {
     private _serviceCharlas: ServiceCharlas,
     private _serviceUsuarios: ServiceUsuarios,
     private _serviceAcreditacionesCharlas: ServiceSolicitudAcreditacionesCharlas,
+    private _serviceEmail: ServiceEmail,
     private _router: Router
   ) {}
 
@@ -48,7 +52,27 @@ export class MischarrlasTechridersComponent implements OnInit {
           .navigate(['/usuario/perfil'], { skipLocationChange: true })
           .then(() => {
             this._serviceQueryTools.actualizacionCharlas();
-            this._router.navigate(['/mischarlastech']);
+            this._serviceCharlas.findCharla(idCharla).subscribe((response) => {
+              let idcurso: number = response.idCurso;
+              this._serviceQueryTools
+                .getCursosProfesorAll()
+                .subscribe((response) => {
+                  let cursosProfesores: any[] = response;
+                  let correos: string[] = [];
+                  cursosProfesores.forEach((element) => {
+                    if (element.idCurso == idcurso)
+                      correos.push(element.emailProfesor);
+                  });
+                  correos.push(environment.emailAdmin);
+                  let asunto: string = 'INFO CHARLA TECH RIDERS';
+                  let mensaje: string = 'desasociar charla';
+                  this._serviceEmail
+                    .enviarMail(correos, asunto, mensaje)
+                    .subscribe(() => {
+                      this._router.navigate(['/mischarlastech']);
+                    });
+                });
+            });
           });
       });
   }
