@@ -19,13 +19,13 @@ enviarCorreoContrasena(email: string, asunto: string, mensaje: string): Observab
   }
 
   cambiarpassword(password: string, codigo:string, email:string): Observable<any> {
-    let url = environment.urlApiLocal;
+    let url = environment.urlApi;
     let request = 'api/usuarios/UpdatePassword/'+password + "/"+codigo +"/"+ email; 
     return this._http.put(url + request,null);
   }
   
   getTokenPass(email: string): Observable<any>{
-    let url = environment.urlApiLocal;
+    let url = environment.urlApi;
     let request ="api/Usuarios/RecuperarTokenPass/"+email;
     return this._http.get(url + request);
   }
