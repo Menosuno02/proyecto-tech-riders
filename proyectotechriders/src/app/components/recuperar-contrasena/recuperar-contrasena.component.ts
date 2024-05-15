@@ -16,13 +16,16 @@ export class RecuperarContrasenaComponent {
     private _serviceAuth: ServiceAuth,
     private _serviceenviarcorreo: Serviceenviarcorreo
   ) {}
+
   recuperarcontrasenia(): void {
     let email = this.controlEmail.nativeElement.value;
     let mensaje = '';
     let asunto = 'Recuperar contraseña';
     this._serviceenviarcorreo.getTokenPass(email).subscribe((response) => {
       console.log(response);
-      mensaje= "Este es su enlace para modifcar su contraseña: http://localhost:4200/modificarcontrasenyatoken/"+response
+      mensaje =
+        'Este es su enlace para modifcar su contraseña: http://localhost:4200/modificarcontrasenyatoken/' +
+        response;
       this._serviceenviarcorreo
         .enviarCorreoContrasena(email, asunto, mensaje)
         .subscribe((response) => {});

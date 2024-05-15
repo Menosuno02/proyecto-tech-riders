@@ -32,32 +32,31 @@ export class ModificarContrasenyaTokenComponent {
     let email = this.controlemail.nativeElement.value;
     let nueva = this.controlpass.nativeElement.value;
     let repetir = this.controlrepetir.nativeElement.value;
-        if (nueva != repetir) {
+    if (nueva != repetir) {
+      Swal.fire({
+        color: '#333333',
+        confirmButtonColor: '#212529',
+        confirmButtonText: 'Cerrar',
+        icon: 'error',
+        text: 'Las dos contraseñas nuevas no son iguales',
+        title: 'Error',
+      });
+    } else {
+      this._serviceenviarcorreo
+        .cambiarpassword(nueva, this.codigo, email)
+        .subscribe((response) => {
           Swal.fire({
             color: '#333333',
-            confirmButtonColor: '#212529',
-            confirmButtonText: 'Cerrar',
-            icon: 'error',
-            text: 'Las dos contraseñas nuevas no son iguales',
-            title: 'Error',
+            icon: 'success',
+            showConfirmButton: false,
+            text: 'Contraseña modificada correctamente',
+            timer: 4000,
+            timerProgressBar: true,
+            title: 'Modificado con éxito',
+          }).then((result) => {
+            this._router.navigate(['/login']);
           });
-        } else {
-          this._serviceenviarcorreo.cambiarpassword(nueva, this.codigo, email).subscribe(response=>{
-            Swal.fire({
-              color: '#333333',
-              icon: 'success',
-              showConfirmButton: false,
-              text: 'Contraseña modificada correctamente',
-              timer: 4000,
-              timerProgressBar: true,
-              title: 'Modificado con éxito',
-            }).then((result) => {
-              this._router.navigate(['/login']);
-            });
-
-
-          });
-        }
-      }
+        });
+    }
   }
-
+}
