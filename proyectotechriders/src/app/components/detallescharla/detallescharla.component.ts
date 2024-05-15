@@ -10,7 +10,6 @@ import { ServiceQueryTools } from 'src/app/services/service.querytools';
 import { ServiceSolicitudAcreditacionesCharlas } from 'src/app/services/service.solicitudacreditacionescharlas';
 import { ServiceTecnologias } from 'src/app/services/service.tecnologias';
 import { ServiceTecnologiasCharlas } from 'src/app/services/service.tecnologiascharlas';
-import { environment } from 'src/environments/environment.development';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -85,9 +84,8 @@ export class DetallescharlaComponent implements OnInit {
           linkpost =
             '<p>No se ha asignado el link a la acreditación en LinkedIn para esta charla.</p>';
         }
-        let email: string = environment.emailAdmin;
         var correo: MailModel = {
-          email: email,
+          email: 'hectormauricio.almaraz@tajamar365.com',
           asunto: 'Solicitud de acreditación charla',
           mensaje:
             `
