@@ -7,19 +7,17 @@ import { environment } from 'src/environments/environment.development';
 export class ServiceEmail {
   constructor(private _http: HttpClient) {}
 
-  private url = environment.urlLogicContactoAdmin;
   sendEmail(asunto: string, cuerpo: string): Observable<any> {
-    let header = { 
-      'Content-Type': 'application/json'
+    let url = environment.urlLogicContactoAdmin;
+    let header = {
+      'Content-Type': 'application/json',
     };
-    const body = JSON.stringify({
-      'asunto': asunto,
-      'mensaje': cuerpo
+    let body = JSON.stringify({
+      asunto: asunto,
+      mensaje: cuerpo,
     });
-
-    return this._http.post(this.url, body, {headers: header});
+    return this._http.post(url, body, { headers: header });
   }
-
 
   enviarMail(
     email: string[],
@@ -36,4 +34,3 @@ export class ServiceEmail {
     return this._http.post(url, json, { headers: header });
   }
 }
-
