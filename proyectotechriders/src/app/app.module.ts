@@ -131,6 +131,7 @@ import { ServiceEmail } from './services/service.email';
     ServiceCharlas,
     ServiceCursos,
     ServiceCursosProfesores,
+    ServiceEmail,
     ServiceEmpresasCentros,
     ServiceEstadosCharlas,
     ServicePeticionesAltaUsers,
