@@ -7,28 +7,35 @@ import { environment } from 'src/environments/environment.development';
 export class Serviceenviarcorreo {
   constructor(private _http: HttpClient) {}
 
-enviarCorreoContrasena(email: string, asunto: string, mensaje: string): Observable<any> {
-    let url =environment.ulrLogicApp;
+  enviarCorreoContrasena(
+    email: string,
+    asunto: string,
+    mensaje: string
+  ): Observable<any> {
+    let url = environment.urlLogicApp;
     let json = JSON.stringify({
       email: email,
       asunto: asunto,
-      mensaje: mensaje
+      mensaje: mensaje,
     });
-    let header = new HttpHeaders({ 'Content-Type': 'application/json'});
-    return this._http.post(url, json, {headers: header});
+    let header = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this._http.post(url, json, { headers: header });
   }
 
-  cambiarpassword(password: string, codigo:string, email:string): Observable<any> {
+  cambiarpassword(
+    password: string,
+    codigo: string,
+    email: string
+  ): Observable<any> {
     let url = environment.urlApi;
-    let request = 'api/usuarios/UpdatePassword/'+password + "/"+codigo +"/"+ email; 
-    return this._http.put(url + request,null);
+    let request =
+      'api/usuarios/UpdatePassword/' + password + '/' + codigo + '/' + email;
+    return this._http.put(url + request, null);
   }
-  
-  getTokenPass(email: string): Observable<any>{
+
+  getTokenPass(email: string): Observable<any> {
     let url = environment.urlApi;
-    let request ="api/Usuarios/RecuperarTokenPass/"+email;
+    let request = 'api/Usuarios/RecuperarTokenPass/' + email;
     return this._http.get(url + request);
   }
 }
-
-
