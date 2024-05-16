@@ -19,7 +19,6 @@ export class ListadotrComponent implements OnInit {
   public filter_array!: any;
   public role!: number | null;
   public techRidersCargados: boolean = false;
-  public urlApiImg: string = environment.urlApiImgs;
 
   constructor(private _serviceQueryTools: ServiceQueryTools) {}
 
