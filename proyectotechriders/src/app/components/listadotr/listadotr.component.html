@@ -43,7 +43,17 @@
       <div class="card card shadow-card w-100">
         <div class="card-body">
           <h5 class="card-title text-center">{{ tr.techRider }}</h5>
-          <h6 class="card-subtitle mb-2 text-body-secondary text-center">
+          <img
+            class="img-fluid w-100 rounded mb-4 mx-auto d-block mt-3"
+            id="usuarioimagen"
+            style="max-width: 150px; max-height: 150px"
+            [src]="
+              tr.imagen
+                ? urlApiImg + tr.imagen
+                : '../../../assets/images/img-default-user.png'
+            "
+          />
+          <h6 class="card-subtitle text-body-secondary text-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"

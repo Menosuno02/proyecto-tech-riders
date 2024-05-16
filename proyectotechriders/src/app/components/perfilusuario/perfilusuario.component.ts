@@ -9,6 +9,7 @@ import { ServiceProvincias } from 'src/app/services/service.provincias';
 import { ServiceEmpresasCentros } from 'src/app/services/service.empresascentros';
 import { ServiceRoles } from 'src/app/services/service.roles';
 import { ServiceQueryTools } from 'src/app/services/service.querytools';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-perfilusuario',
@@ -24,6 +25,7 @@ export class PerfilusuarioComponent implements OnInit {
   public cursos!: any[];
   public empresaExists: boolean = false;
   public empresaLoaded: boolean = false;
+  public urlApiImg: string = environment.urlApiImgs;
 
   constructor(
     private _serviceUsuarios: ServiceUsuarios,
@@ -36,7 +38,7 @@ export class PerfilusuarioComponent implements OnInit {
 
   ngOnInit(): void {
     if (!localStorage.getItem('token')) this._router.navigate(['/login']);
-    else {
+    else {      
       this._serviceUsuarios.getPerfilUsuario().subscribe((response) => {
         this.usuario = response;
         this._serviceProvincias

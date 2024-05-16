@@ -89,6 +89,19 @@
             </option>
           </select>
         </div>
+        <div class="mt-3">
+          <label class="form-label fw-bold">Imagen</label>
+          <input
+            type="file"
+            title="Choose a video please"
+            name="controlimagen"
+            [value]="usuario.imagen"
+            #controlimagen
+            placeholder="Imagen de Usuario"
+            class="form-control"
+            accept="image/*"
+          />
+        </div>
       </div>
 
       <!-- datos empresa representante -->

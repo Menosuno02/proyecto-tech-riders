@@ -99,8 +99,16 @@
       </textarea>
     </div>
     <!-- Modificacion Mauricio -->
-    <div class="mt-3" *ngIf="charla.idTechRider==idUsuario&&charla.idEstadoCharla==idEstadoCharlaCompl">
-      <button (click)="enviarSolicitudAcreditacion()" class="btn btn-dark">Solicitar acreditación</button>
+    <div
+      class="mt-3"
+      *ngIf="
+        charla.idTechRider == idUsuario &&
+        charla.idEstadoCharla == idEstadoCharlaCompl
+      "
+    >
+      <button (click)="enviarSolicitudAcreditacion()" class="btn btn-dark">
+        Solicitar acreditación
+      </button>
     </div>
     <!-- Modificacion Mauricio -->
   </div>

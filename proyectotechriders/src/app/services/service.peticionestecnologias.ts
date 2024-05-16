@@ -9,7 +9,7 @@ export class ServicePeticionesTecnologias {
 
   getPeticionesTecnologia(): Observable<any> {
     let url = environment.urlApi;
-    let request = '/api/PeticionesTecnologias';
+    let request = 'api/PeticionesTecnologias';
     let header = { Authorization: 'bearer ' + localStorage.getItem('token') };
     return this._http.get(url + request, { headers: header });
   }

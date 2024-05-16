@@ -3,9 +3,10 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
 
+
 @Injectable()
 export class ServiceAuth {
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient,) {}
 
   loginUser(email: string, password: string): Observable<any> {
     let url = environment.urlApi;
@@ -17,4 +18,7 @@ export class ServiceAuth {
     let header = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this._http.post(url + request, json, { headers: header });
   }
+
 }
+
+
