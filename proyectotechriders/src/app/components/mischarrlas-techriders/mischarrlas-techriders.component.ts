@@ -8,7 +8,7 @@ import { ServiceCharlas } from 'src/app/services/service.charlas';
 import { ServiceUsuarios } from 'src/app/services/service.usuarios';
 import { ServiceSolicitudAcreditacionesCharlas } from 'src/app/services/service.solicitudacreditacionescharlas';
 import { ServiceEmail } from 'src/app/services/service.email';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 import { Charla } from 'src/app/models/Charla';
 import { MailModel } from 'src/app/models/MailModel';
 import { ServiceLogicapps } from 'src/app/services/service.logicapps';

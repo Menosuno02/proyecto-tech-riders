@@ -11,7 +11,7 @@ import { ServiceEstadosCharlas } from 'src/app/services/service.estadoscharlas';
 import { ServiceQueryTools } from 'src/app/services/service.querytools';
 import { ServiceTecnologiasCharlas } from 'src/app/services/service.tecnologiascharlas';
 import { ServiceUsuarios } from 'src/app/services/service.usuarios';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
 @Component({

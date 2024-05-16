@@ -9,7 +9,7 @@ import { ServiceProvincias } from 'src/app/services/service.provincias';
 import { ServiceEmpresasCentros } from 'src/app/services/service.empresascentros';
 import { ServiceRoles } from 'src/app/services/service.roles';
 import { ServiceQueryTools } from 'src/app/services/service.querytools';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-perfilusuario',

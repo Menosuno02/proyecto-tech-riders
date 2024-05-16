@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import { ServiceQueryTools } from 'src/app/services/service.querytools';
 import { ServiceCharlas } from 'src/app/services/service.charlas';
 import { ServiceEmail } from 'src/app/services/service.email';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-charlas-tech-riders',
