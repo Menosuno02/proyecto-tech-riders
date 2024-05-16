@@ -8,7 +8,7 @@ export class Serviceenviarcorreo {
   constructor(private _http: HttpClient) {}
 
 enviarCorreoContrasena(email: string, asunto: string, mensaje: string): Observable<any> {
-    let url =environment.ulrLogicApp;
+    let url = environment.urlLogicApp;
     let json = JSON.stringify({
       email: email,
       asunto: asunto,
