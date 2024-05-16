@@ -152,7 +152,7 @@ export class SolicitarcharlaComponent implements OnInit {
                   }
                 }
               }
-              // Ordenar el array(tecnologiasTechridersApiArray) si es necesario
+              //Ordenar el array(tecnologiasTechridersApiArray) si es necesario.
               tecnologiasTechridersApiArray.sort((a, b) => a - b);
               this._serviceCharlas.checkIdsTecnologias(tecnologiasSelectArray,tecnologiasTechridersApiArray);
             });
