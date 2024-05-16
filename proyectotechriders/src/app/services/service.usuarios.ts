@@ -31,7 +31,7 @@ export class ServiceUsuarios {
   editUsuarioForm(usuario: FormData): Observable<any> {
     let url = environment.urlApi;
     let request = 'api/Usuarios/EditFormData';
-    let header = new HttpHeaders({      
+    let header = new HttpHeaders({
       Authorization: 'bearer ' + localStorage.getItem('token'),
     });
     return this._http.put(url + request, usuario, { headers: header });
@@ -66,9 +66,9 @@ export class ServiceUsuarios {
     // let header = {
     //   'Content-Type': 'application/json',
     // };
-    // let json = JSON.stringify(usuario);    
+    // let json = JSON.stringify(usuario);
     // return this._http.post(url + request, json, { headers: header });
-    return this._http.post(url + request, usuario);    
+    return this._http.post(url + request, usuario);
   }
 
   cambiarEstadoUsuario(idUsuario: number): Observable<any> {

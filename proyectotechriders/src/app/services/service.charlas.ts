@@ -71,30 +71,35 @@ export class ServiceCharlas {
 
   //Service, donde se prepara el envio de un email mediante Logic App.
   sendEmail(): void {
-    var url="https://prod-125.westeurope.logic.azure.com:443/workflows/3cfb6aa59bc84569b929fea566c934a5/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=s3G4LnvgC48QcS3czWqYGO2kP3jnobw5RImtlyvUvBw";
- 
-    var correo={
-         email : "fjhon868@gmail.com", //Correo Administrador
-         asunto : "Charla Creada",
-         mensaje : "Se ha creado una charla pero una de las tecnologias seleccionadas no esta asociada a ningun TechRider"
-     };
-    this._http.post(url,correo).subscribe({
-      next:()=> {
-       
-      },
+    var url =
+      'https://prod-125.westeurope.logic.azure.com:443/workflows/3cfb6aa59bc84569b929fea566c934a5/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=s3G4LnvgC48QcS3czWqYGO2kP3jnobw5RImtlyvUvBw';
+
+    var correo = {
+      email: 'fjhon868@gmail.com', //Correo Administrador
+      asunto: 'Charla Creada',
+      mensaje:
+        'Se ha creado una charla pero una de las tecnologias seleccionadas no esta asociada a ningun TechRider',
+    };
+    this._http.post(url, correo).subscribe({
+      next: () => {},
     });
   }
 
   //Service, para comprobar tecnologias seleccionadas con las tecnologias de los techriders, con el fin de saber si hay algun techrider sin esas
   //tecnologias.
-  //Funcionamiento: Pasamos por parametro dos arrays de numeros, el primer array son las IDS de las tecnologias seleccionadas en el formulario y 
-  //el otro array todas las IDS de tecnologias de los techriders asociados. Comparamos si existe los IDS del primer array en el segundo, si en 
-  //caso es falso mandamos un email al Administrador. 
-  checkIdsTecnologias(tecnologiaselect: number[], techridertecnologia: number[]): void {
+  //Funcionamiento: Pasamos por parametro dos arrays de numeros, el primer array son las IDS de las tecnologias seleccionadas en el formulario y
+  //el otro array todas las IDS de tecnologias de los techriders asociados. Comparamos si existe los IDS del primer array en el segundo, si en
+  //caso es falso mandamos un email al Administrador.
+  checkIdsTecnologias(
+    tecnologiaselect: number[],
+    techridertecnologia: number[]
+  ): void {
     let numerosTecnologiaselect = tecnologiaselect.map(Number);
-    let todosPresentes = numerosTecnologiaselect.every(numero => techridertecnologia.includes(numero));
+    let todosPresentes = numerosTecnologiaselect.every((numero) =>
+      techridertecnologia.includes(numero)
+    );
     if (!todosPresentes) {
-      console.log("Se ha enviado un mensaje al Admin");
+      console.log('Se ha enviado un mensaje al Admin');
       this.sendEmail();
     }
   }

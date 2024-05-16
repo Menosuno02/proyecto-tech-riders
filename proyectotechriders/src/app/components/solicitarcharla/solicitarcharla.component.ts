@@ -122,13 +122,13 @@ export class SolicitarcharlaComponent implements OnInit {
             let idCharla = response.idCharla;
             let tecnologias =
               this.selectTecnologias.nativeElement.selectedOptions;
-            
+
             //Jhon
             let tecnologiasSelectArray: number[] = [];
             let tecnologiasTechridersApiArray: number[] = [];
             let tecnologiasTechridersApiSet: { [key: number]: boolean } = {};
             //--
-            
+
             for (let i = 0; i < tecnologias.length; i++) {
               //jhon
               tecnologiasSelectArray.push(tecnologias[i].value);
@@ -140,7 +140,7 @@ export class SolicitarcharlaComponent implements OnInit {
 
             //Implementacion Jhon
             this._serviceCharlas.getTecnologiasTech().subscribe((response) => {
-              //Recorreros el response para obtener los ids de las tecnologias asociadas al techrider y guardarlas en un array(tecnologiasTechridersApiArray) 
+              //Recorreros el response para obtener los ids de las tecnologias asociadas al techrider y guardarlas en un array(tecnologiasTechridersApiArray)
               //las ids de las tecnologias(no repes).
               for (let key in response) {
                 if (response.hasOwnProperty(key)) {
@@ -154,7 +154,10 @@ export class SolicitarcharlaComponent implements OnInit {
               }
               //Ordenar el array(tecnologiasTechridersApiArray) si es necesario.
               tecnologiasTechridersApiArray.sort((a, b) => a - b);
-              this._serviceCharlas.checkIdsTecnologias(tecnologiasSelectArray,tecnologiasTechridersApiArray);
+              this._serviceCharlas.checkIdsTecnologias(
+                tecnologiasSelectArray,
+                tecnologiasTechridersApiArray
+              );
             });
             //Fin implementacion
 

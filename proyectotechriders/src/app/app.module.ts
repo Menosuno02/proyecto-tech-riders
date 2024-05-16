@@ -51,7 +51,6 @@ import { RegisterusuarioComponent } from './components/registerusuario/registeru
 import { SolicitarcharlaComponent } from './components/solicitarcharla/solicitarcharla.component';
 import { ValoracioncharlaComponent } from './components/valoracioncharla/valoracioncharla.component';
 
-
 import { ServiceAuth } from './services/service.auth';
 import { ServiceCharlas } from './services/service.charlas';
 import { ServiceCursos } from './services/service.cursos';
@@ -116,8 +115,7 @@ import { ServiceEmail } from './services/service.email';
     SolicitarcharlaComponent,
     ValoracioncharlaComponent,
     RecuperarContrasenaComponent,
-    ModificarContrasenyaTokenComponent
-    
+    ModificarContrasenyaTokenComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Usuario } from 'src/app/models/Usuario';
-import { ServiceAuth } from 'src/app/services/service.auth';
-import { ServiceUsuarios } from 'src/app/services/service.usuarios';
 import { Serviceenviarcorreo } from 'src/app/services/service.enviarcorreo';
 import Swal from 'sweetalert2';
 @Component({
@@ -18,7 +15,6 @@ export class ModificarContrasenyaTokenComponent {
 
   constructor(
     private _router: Router,
-    private _serviceUsuarios: ServiceUsuarios,
     private _route: ActivatedRoute,
     private _serviceenviarcorreo: Serviceenviarcorreo
   ) {}

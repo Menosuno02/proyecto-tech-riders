@@ -36,7 +36,10 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
 
   { path: 'recuperarcontrasena', component: RecuperarContrasenaComponent },
-  { path: 'modificarcontrasenyatoken/:codigo', component: ModificarContrasenyaTokenComponent },
+  {
+    path: 'modificarcontrasenyatoken/:codigo',
+    component: ModificarContrasenyaTokenComponent,
+  },
 
   { path: 'usuario/perfil', component: PerfilusuarioComponent },
   { path: 'logout', component: LogoutComponent },

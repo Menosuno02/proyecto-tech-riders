@@ -38,7 +38,7 @@ export class PerfilusuarioComponent implements OnInit {
 
   ngOnInit(): void {
     if (!localStorage.getItem('token')) this._router.navigate(['/login']);
-    else {      
+    else {
       this._serviceUsuarios.getPerfilUsuario().subscribe((response) => {
         this.usuario = response;
         this._serviceProvincias

@@ -113,6 +113,7 @@ export class DetallescharlaComponent implements OnInit {
                     icon: 'success',
                     text: 'El proceso ha sido exitoso',
                     title: 'Operación completada',
+                    confirmButtonColor: '#212529',
                     timer: 1500,
                   });
                 },

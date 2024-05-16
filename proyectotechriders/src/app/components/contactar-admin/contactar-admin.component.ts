@@ -15,11 +15,13 @@ export class ContactarAdminComponent {
   @ViewChild('controlasunto') controlAsunto!: ElementRef;
   @ViewChild('controlcomentarios') controlComentarios!: ElementRef;
   public mensaje!: string;
-  public email!:string;
+  public email!: string;
   public usuario!: Usuario;
-  constructor(private _router: Router,
+  constructor(
+    private _router: Router,
     private _serviceEmail: ServiceEmail,
-    private _serviceUsuarios: ServiceUsuarios) { }
+    private _serviceUsuarios: ServiceUsuarios
+  ) {}
   enviarSolicitud(): void {
     let asunto = this.controlAsunto.nativeElement.value;
     let cuerpo = this.controlComentarios.nativeElement.value;
@@ -29,18 +31,17 @@ export class ContactarAdminComponent {
     } else {
       this._serviceUsuarios.getPerfilUsuario().subscribe((response) => {
         this.usuario = response;
-        cuerpo+="<br/><br/><strong>Interesado: " +this.usuario.email + "</strong>";
-        this._serviceEmail
-          .sendEmail(asunto, cuerpo)
-          .subscribe((response) => {
-            Swal.fire({
-              color: '#333333',
-              icon: 'success',
-              title: 'Se ha envido correctamente',
-              showConfirmButton: false,
-              timer: 1500
-            });
+        cuerpo +=
+          '<br/><br/><strong>Interesado: ' + this.usuario.email + '</strong>';
+        this._serviceEmail.sendEmail(asunto, cuerpo).subscribe((response) => {
+          Swal.fire({
+            color: '#333333',
+            icon: 'success',
+            title: 'Se ha enviado correctamente',
+            showConfirmButton: false,
+            timer: 1500,
           });
+        });
         this._router.navigate(['/usuario/perfil']);
       });
     }

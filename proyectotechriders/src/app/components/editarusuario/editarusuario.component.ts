@@ -87,15 +87,35 @@ export class EditarusuarioComponent implements OnInit {
     let formUsuario = new FormData();
 
     formUsuario.append('Usuario.IdUsuario', this.usuario.idUsuario.toString());
-    formUsuario.append('Usuario.Nombre', this.controlNombre.nativeElement.value);
-    formUsuario.append('Usuario.Apellidos', this.controlApellidos.nativeElement.value);
+    formUsuario.append(
+      'Usuario.Nombre',
+      this.controlNombre.nativeElement.value
+    );
+    formUsuario.append(
+      'Usuario.Apellidos',
+      this.controlApellidos.nativeElement.value
+    );
     formUsuario.append('Usuario.Email', this.controlEmail.nativeElement.value);
-    formUsuario.append('Usuario.Telefono', this.controlTelefono.nativeElement.value);
-    formUsuario.append('Usuario.LinkedIn', this.controlLinkedin.nativeElement.value);
+    formUsuario.append(
+      'Usuario.Telefono',
+      this.controlTelefono.nativeElement.value
+    );
+    formUsuario.append(
+      'Usuario.LinkedIn',
+      this.controlLinkedin.nativeElement.value
+    );
     formUsuario.append('Usuario.Password', this.usuario.password);
     formUsuario.append('Usuario.IdRole', this.usuario.idRole.toString());
-    formUsuario.append('Usuario.IdProvincia', this.selectProvincia.nativeElement.selectedOptions[0].value);
-    formUsuario.append('Usuario.IdEmpresaCentro', this.usuario.idEmpresaCentro ? this.usuario.idEmpresaCentro.toString() : "");
+    formUsuario.append(
+      'Usuario.IdProvincia',
+      this.selectProvincia.nativeElement.selectedOptions[0].value
+    );
+    formUsuario.append(
+      'Usuario.IdEmpresaCentro',
+      this.usuario.idEmpresaCentro
+        ? this.usuario.idEmpresaCentro.toString()
+        : ''
+    );
     formUsuario.append('Usuario.Estado', this.usuario.estado.toString());
     formUsuario.append('Usuario.LinkedInVisible', this.publico ? '1' : '0');
 
