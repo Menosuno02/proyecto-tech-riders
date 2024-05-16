@@ -1,7 +1,7 @@
 <div class="card shadow-card p-4 mb-3">
   <div *ngIf="techrider">
-    <div class="row ">
-      <div class="col">
+    <div class="row">
+      <div class="col-12">
         <h1 class="fw-bold text-center">{{ techrider.techRider }}</h1>
         <p class="text-muted text-center">
           TechRider
@@ -13,10 +13,21 @@
           </span>
         </p>
       </div>
-      <div class="col-lg-8 mb-2 d-none d-sm-flex justify-content-center align-items-center d-lg-block" style="height: 125px;">
-        <img class="img-fluid rounded" id="usuarioimagen" style="max-width: 125px; max-height: 125px;" 
-        [src]="techrider.imagen ? techrider.imagen : '../../../assets/images/img-default-user.png'" />
-      </div>            
+      <div
+        class="col-12 mx-auto mb-2 d-none d-sm-flex justify-content-center align-items-center d-block"
+        style="height: 125px"
+      >
+        <img
+          class="img-fluid rounded"
+          id="usuarioimagen"
+          style="max-width: 125px; max-height: 125px"
+          [src]="
+            techrider.imagen
+              ? techrider.imagen
+              : '../../../assets/images/img-default-user.png'
+          "
+        />
+      </div>
     </div>
     <div class="mt-3">
       <div>
