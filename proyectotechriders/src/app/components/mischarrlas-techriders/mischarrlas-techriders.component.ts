@@ -10,6 +10,8 @@ import { ServiceSolicitudAcreditacionesCharlas } from 'src/app/services/service.
 import { ServiceEmail } from 'src/app/services/service.email';
 import { environment } from 'src/environments/environment.development';
 import { Charla } from 'src/app/models/Charla';
+import { MailModel } from 'src/app/models/MailModel';
+import { ServiceLogicapps } from 'src/app/services/service.logicapps';
 
 @Component({
   selector: 'app-mischarrlas-techriders',
@@ -27,6 +29,8 @@ export class MischarrlasTechridersComponent implements OnInit {
     private _serviceUsuarios: ServiceUsuarios,
     private _serviceAcreditacionesCharlas: ServiceSolicitudAcreditacionesCharlas,
     private _serviceEmail: ServiceEmail,
+    private _serviceMail: ServiceLogicapps,
+    private _serviceSolicitudAcred: ServiceSolicitudAcreditacionesCharlas,
     private _router: Router
   ) {}
 
@@ -85,9 +89,68 @@ export class MischarrlasTechridersComponent implements OnInit {
         this._router
           .navigate(['/usuario/perfil'], { skipLocationChange: true })
           .then(() => {
+            this.enviarSolicitudAcreditacion(idCharla);
             this._router.navigate(['/mischarlastech']);
           });
       });
+  }
+
+  enviarSolicitudAcreditacion(idCharla: number): void {
+    this._serviceQueryTools.findCharlaView(idCharla).subscribe((response) => {
+      var charlaDetalles: DetallesEstadoCharlaTech =
+        response as DetallesEstadoCharlaTech;
+      console.log(charlaDetalles);
+
+      this._serviceCharlas.findCharla(charlaDetalles.idCharla).subscribe({
+        next: (data: Charla) => {
+          var linkpost =
+            '<a href=' +
+            data.acreditacionLinkedIn +
+            '>' +
+            data.acreditacionLinkedIn +
+            '</a>';
+          if (data.acreditacionLinkedIn == null) {
+            linkpost =
+              '<p>No se ha asignado el link a la acreditación en LinkedIn para esta charla.</p>';
+          }
+          var correo: MailModel = {
+            email: 'hectormauricio.almaraz@tajamar365.com',
+            asunto: 'Solicitud de acreditación charla',
+            mensaje:
+              `
+          <h4>Solicitud acreditación</h4>
+          <p>
+            El TechRider ` +
+              charlaDetalles.email +
+              ` ha solicitado la acreditación para la charla ` +
+              charlaDetalles.descripcionCharla +
+              ` que tuvo lugar el ` +
+              charlaDetalles.fechaCharla +
+              `.
+          </p>
+          ` +
+              linkpost,
+          };
+          this._serviceMail.sendMail(correo).subscribe({
+            complete: () => {
+              this._serviceSolicitudAcred
+                .createSolicitudAcreditacionCharla(charlaDetalles.idCharla)
+                .subscribe({
+                  complete: () => {
+                    Swal.fire({
+                      color: '#333333',
+                      icon: 'success',
+                      text: 'El proceso ha sido exitoso',
+                      title: 'Operación completada',
+                      timer: 1500,
+                    });
+                  },
+                });
+            },
+          });
+        },
+      });
+    });
   }
 
   reasignarCharla(idCharla: number) {
