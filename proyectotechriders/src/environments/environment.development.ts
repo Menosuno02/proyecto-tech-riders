@@ -1,6 +1,5 @@
 export const environment = {
   urlApi: 'https://apitechriders2024.azurewebsites.net/',
-  urlApiImgs: 'https://4.231.123.62/imgs/',
   urlLogicMailJhon:
     'https://prod-217.westeurope.logic.azure.com:443/workflows/3b8c19063d9040c5b94f1f442ec8f30e/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=5T5oyk_ynR2NGttdCbI5okBC-YWjae38gIOaa9pzAy0',
   urlLogicContactoAdmin:
