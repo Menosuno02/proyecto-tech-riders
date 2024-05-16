@@ -85,7 +85,7 @@ export class DetallescharlaComponent implements OnInit {
             '<p>No se ha asignado el link a la acreditación en LinkedIn para esta charla.</p>';
         }
         var correo: MailModel = {
-          email: 'hectormauricio.almaraz@tajamar365.com',
+          email: 'techriders2825@tajamar365.com',
           asunto: 'Solicitud de acreditación charla',
           mensaje:
             `
