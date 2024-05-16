@@ -21,7 +21,6 @@
       </div>
       <div class="col-4"><hr /></div>
     </div>
-
     <div class="mt-3">
       <div class="row">
         <div class="col-md-3 mb-2">
@@ -31,7 +30,7 @@
             style="max-width: 200px; max-height: 200px"
             [src]="
               usuario.imagen
-                ? urlApiImg + usuario.imagen
+                ? usuario.imagen
                 : '../../../assets/images/img-default-user.png'
             "
           />

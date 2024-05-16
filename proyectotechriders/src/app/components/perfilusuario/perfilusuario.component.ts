@@ -25,7 +25,6 @@ export class PerfilusuarioComponent implements OnInit {
   public cursos!: any[];
   public empresaExists: boolean = false;
   public empresaLoaded: boolean = false;
-  public urlApiImg: string = environment.urlApiImgs;
 
   constructor(
     private _serviceUsuarios: ServiceUsuarios,
