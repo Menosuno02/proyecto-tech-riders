@@ -6,6 +6,8 @@ import { ServiceQueryTools } from 'src/app/services/service.querytools';
 import { ServiceCharlas } from 'src/app/services/service.charlas';
 import { ServiceEmail } from 'src/app/services/service.email';
 import { environment } from 'src/environments/environment';
+import { ServiceUsuarios } from 'src/app/services/service.usuarios';
+import { Usuario } from 'src/app/models/Usuario';
 
 @Component({
   selector: 'app-charlas-tech-riders',
@@ -21,6 +23,7 @@ export class CharlasTechRidersComponent implements OnInit {
     private _serviceQueryTools: ServiceQueryTools,
     private _serviceCharlas: ServiceCharlas,
     private _serviceEmail: ServiceEmail,
+    private _serviceUsuarios: ServiceUsuarios,
     private _router: Router
   ) {}
 
@@ -72,13 +75,22 @@ export class CharlasTechRidersComponent implements OnInit {
                             if (element.idCurso == idcurso)
                               correos.push(element.emailProfesor);
                           });
-                          correos.push(environment.emailAdmin);
-                          let asunto: string = 'INFO CHARLA TECH RIDERS';
-                          let mensaje: string = 'Asociar charla';
-                          this._serviceEmail
-                            .enviarMail(correos, asunto, mensaje)
-                            .subscribe(() => {
-                              this._router.navigate(['/mischarlastech']);
+                          this._serviceUsuarios
+                            .getUsuarios()
+                            .subscribe((response) => {
+                              let usuarios: Usuario[] = response;
+                              usuarios.forEach((usuario) => {
+                                if (usuario.idRole == 1)
+                                  correos.push(usuario.email);
+                              });
+                              correos.push(environment.emailAdmin);
+                              let asunto: string = 'INFO CHARLA TECH RIDERS';
+                              let mensaje: string = 'Asociar charla';
+                              this._serviceEmail
+                                .enviarMail(correos, asunto, mensaje)
+                                .subscribe(() => {
+                                  this._router.navigate(['/mischarlastech']);
+                                });
                             });
                         });
                     });

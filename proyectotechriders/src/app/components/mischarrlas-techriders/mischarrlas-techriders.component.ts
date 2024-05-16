@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
 import { Charla } from 'src/app/models/Charla';
 import { MailModel } from 'src/app/models/MailModel';
 import { ServiceLogicapps } from 'src/app/services/service.logicapps';
+import { Usuario } from 'src/app/models/Usuario';
 
 @Component({
   selector: 'app-mischarrlas-techriders',
@@ -67,14 +68,20 @@ export class MischarrlasTechridersComponent implements OnInit {
                     if (element.idCurso == idcurso)
                       correos.push(element.emailProfesor);
                   });
-                  correos.push(environment.emailAdmin);
-                  let asunto: string = 'INFO CHARLA TECH RIDERS';
-                  let mensaje: string = 'desasociar charla';
-                  this._serviceEmail
-                    .enviarMail(correos, asunto, mensaje)
-                    .subscribe(() => {
-                      this._router.navigate(['/mischarlastech']);
+                  this._serviceUsuarios.getUsuarios().subscribe((response) => {
+                    let usuarios: Usuario[] = response;
+                    usuarios.forEach((usuario) => {
+                      if (usuario.idRole == 1) correos.push(usuario.email);
                     });
+                    correos.push(environment.emailAdmin);
+                    let asunto: string = 'INFO CHARLA TECH RIDERS';
+                    let mensaje: string = 'desasociar charla';
+                    this._serviceEmail
+                      .enviarMail(correos, asunto, mensaje)
+                      .subscribe(() => {
+                        this._router.navigate(['/mischarlastech']);
+                      });
+                  });
                 });
             });
           });
@@ -131,6 +138,7 @@ export class MischarrlasTechridersComponent implements OnInit {
           ` +
               linkpost,
           };
+
           this._serviceMail.sendMail(correo).subscribe({
             complete: () => {
               this._serviceSolicitudAcred
