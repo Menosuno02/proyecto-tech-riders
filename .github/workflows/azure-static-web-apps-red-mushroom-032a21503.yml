@@ -20,7 +20,7 @@ jobs:
           submodules: true
           lfs: false
       - name: Change directory
-        run: cd /proyectotechriders
+        run: cd ./proyectotechriders
       - name: Install dependencies
         run: npm install
       - name: Build Angular
