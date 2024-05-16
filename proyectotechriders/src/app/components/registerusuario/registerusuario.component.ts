@@ -103,7 +103,7 @@ export class RegisterusuarioComponent implements OnInit {
     formUsuario.append('Usuario.Password', this.controlPassword.nativeElement.value);
     formUsuario.append('Usuario.IdRole', this.selectRole.nativeElement.selectedOptions[0].value);
     formUsuario.append('Usuario.IdProvincia', this.selectProvincia.nativeElement.selectedOptions[0].value);
-    formUsuario.append('Usuario.IdEmpresaCentro', idEmpresaCentro.toString());
+    formUsuario.append('Usuario.IdEmpresaCentro', idEmpresaCentro ? idEmpresaCentro.toString() : (new Blob));
     formUsuario.append('Usuario.Estado', '2');
     formUsuario.append('Usuario.LinkedInVisible', this.publico ? '1' : '0');
     formUsuario.append('Imagen', this.controlImagen.nativeElement.files[0]);
