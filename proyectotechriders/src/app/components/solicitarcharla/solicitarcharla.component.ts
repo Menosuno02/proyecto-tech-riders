@@ -113,6 +113,7 @@ export class SolicitarcharlaComponent implements OnInit {
           console.log(final);
           return (
             chrl.idCurso == charla.idCurso &&
+            chrl.idEstadoCharla != 1 &&
             fecha >= principio &&
             fecha <= final
           );
