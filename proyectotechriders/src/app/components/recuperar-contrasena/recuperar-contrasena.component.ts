@@ -16,6 +16,7 @@ export class RecuperarContrasenaComponent implements OnInit {
 
   ngOnInit(): void {
     this.url = environment.domainUrl;
+    console.log(this.url);
   }
 
   recuperarcontrasenia(): void {
