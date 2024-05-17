@@ -75,7 +75,7 @@ export class ServiceCharlas {
       'https://prod-125.westeurope.logic.azure.com:443/workflows/3cfb6aa59bc84569b929fea566c934a5/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=s3G4LnvgC48QcS3czWqYGO2kP3jnobw5RImtlyvUvBw';
 
     var correo = {
-      email: 'fjhon868@gmail.com', //Correo Administrador
+      email: 'techriders2825@tajamar365.com', //Correo Administrador
       asunto: 'Charla Creada',
       mensaje:
         'Se ha creado una charla pero una de las tecnologias seleccionadas no esta asociada a ningun TechRider',
